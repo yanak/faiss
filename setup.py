@@ -328,10 +328,10 @@ def customize_compiler_for_nvcc(self):
 
 def get_config():
     config = {'include_dirs': ['.', np.get_include()]}
-    if CUDA.get('nvcc'):
-        config['include_dirs'] += [CUDA['include']]
-        config['library_dirs'] = [CUDA['lib']]
-        config['libraries'] = ['cuda', 'cudart', 'cublas']
+    #if CUDA.get('nvcc'):
+    #    config['include_dirs'] += [CUDA['include']]
+    #    config['library_dirs'] = [CUDA['lib']]
+    #    config['libraries'] = ['cuda', 'cudart', 'cublas']
 
     platform = get_platform()
     if platform.startswith('linux'):
@@ -438,7 +438,7 @@ def pkgconfig(*packages, **kw):
     return config
 
 
-CUDA = locate_cuda()
+#CUDA = locate_cuda()
 
 _swigfaiss = Extension(
     '_swigfaiss',
@@ -489,5 +489,5 @@ setup(
     install_requires=['numpy'],
     package_dir={'faiss': 'python'},
     packages=['faiss'],
-    ext_modules=[_swigfaiss] + ([_swigfaiss_gpu] if CUDA.get('nvcc') else [])
+    ext_modules=[_swigfaiss]# + ([_swigfaiss_gpu] if CUDA.get('nvcc') else [])
 )
